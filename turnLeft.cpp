@@ -71,31 +71,35 @@ int x, y;
         if( str[i] == 'W') {
                 if( face == 'S') {
                        mp[make_pair(x,y)]= mp[make_pair(x,y)] | (1<<1);
-                       if( i != str.length() - 1)
+                       if( i != str.length() - 1) {
                         mp[make_pair(x+1,y)]= mp[make_pair(x+1,y)] | (1);
-                         //cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
+              //           cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
                         ++x;
+                        }
                 }
                  if( face == 'N'){
                         mp[make_pair(x,y)] = mp[make_pair(x,y)] | (1);
-                        if( i != str.length() - 1)
+                        if( i != str.length() - 1) {
                             mp[make_pair(x-1,y)] = mp[make_pair(x-1,y)] | (1<<1);
-                        // cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
+             //            cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
                         --x;
+                        }
                  }
                 if( face == 'E') {
                        mp[make_pair(x,y)] = mp[make_pair(x,y)] | (1<<3);
-                         if( i != str.length() - 1)
+                         if( i != str.length() - 1) {
                             mp[make_pair(x,y+1)] = mp[make_pair(x,y+1)] | (1<<2);
-                       //cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
+            //           cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
                         ++y;
+                        }
                 }
                 if(face =='W') {
                         mp[make_pair(x,y)] = mp[make_pair(x,y)] | (1<<2);
-                        if( i != str.length() - 1)
+                        if( i != str.length() - 1) {
                             mp[make_pair(x,y-1)] = mp[make_pair(x,y-1)] | (1<<3);
-                       //  cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
+           //             cout<<"face  "<<face  << "   "  << x <<" "<<y <<" "<<mp[make_pair(x,y)]<<endl;
                         --y;
+                        }
                 }
             }
         else if( str[i] == 'R') {
@@ -107,7 +111,7 @@ int x, y;
                     face = 'S';
                 else if(face =='W')
                     face = 'N';
-                //cout<<" change dir "<<face <<endl;
+          //      cout<<" change dir "<<face <<endl;
         }
         else if( str[i] == 'L') {
                   if( face == 'S')
@@ -118,14 +122,14 @@ int x, y;
                     face = 'N';
                 else if(face =='W')
                     face = 'S';
-                 //    cout<<" change dir "<<face <<endl;
+         //            cout<<" change dir "<<face <<endl;
         }
 }
 }
 
 int main () {
-freopen("B-small-practice.in","r",stdin);
-freopen("output.out","w",stdout);
+freopen("B-large-practice.in","r",stdin);
+freopen("output111.out","w",stdout);
   int t;
   cin >> t;
   for(int xx = 1 ; xx <= t ; ++xx) {
@@ -134,32 +138,25 @@ freopen("output.out","w",stdout);
     mp.clear();
     cin>> str;
     cin >> rstr;
+    face = 'S';
     str = str.substr(1);
     rstr = rstr.substr(1);
-    face = 'S';
-    //cout<< x<<" " <<y <<endl;
+   // cout<< x<<" " <<y <<endl;
     fillMap(str);
-    if( face == 'N') {
-        ++x;
+    if( face == 'N')
         face = 'S';
-    }
-      if( face == 'S') {
+    else if( face == 'S')
         face = 'N';
-            --x;
-        }
-      if( face == 'E') {
+    else if( face == 'E')
         face = 'W';
-        --y;
-    }
-      if( face == 'W') {
+    else if( face == 'W')
         face = 'E';
-        ++y;
-        }
+
         //cout<< " reverse starts  " << x <<" "<<y <<endl;
-        // cout<<" change dir "<<face <<endl;
+        //cout<<" change dir "<<face <<endl;
         //cout<< "called"  <<endl;
     fillMap(rstr);
-    cout<< "Case #"<< xx <<": "<<endl;
+    cout<< "Case #"<< xx <<":"<<endl;
     int  prev = mp.begin()->first.first;
     for( auto it = mp.begin(); it != mp.end() ;++it) {
        int  x =  it->first.first;
